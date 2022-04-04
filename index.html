@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="A Simple Dapp" />
 
-  <title>Vote Dapp</title>
+  <title>ZVX合约管理后台,智能合约管理后台</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
@@ -29,7 +29,7 @@
 
 
 </head>
- 
+
 <body style="background-color: black;">
 
  <style>  
@@ -44,9 +44,9 @@ div.wid{
 
 
 <div id="vm">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark  fixed-top">
   <div class="container-fluid container">
-    <a class="navbar-brand" href="#">LOGO</a>
+    <img src="img/fi.png" alt="">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -54,7 +54,7 @@ div.wid{
           <a class="nav-link active" aria-current="page" href="#"><strong>首页</strong></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><strong>铸币</strong></a>
+          <a class="nav-link disabled" href="#"         ><strong>铸币</strong></a>
         </li>
          <li class="nav-item">
           <a class="nav-link disabled"><strong>LP质押</strong></a>
@@ -65,23 +65,26 @@ div.wid{
                   <li class="nav-item">
           <a class="nav-link disabled"><strong>自助建站</strong></a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="https://t.me/ZVX_Official" target="_black"><strong>加入交流群</strong></a>
+        </li>
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <strong>代币管理</strong>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#">分红币后台</a></li>
-            <li><a class="dropdown-item" href="#">八代推广+分红币后台</a></li>
+             <li><a class="dropdown-item" href="#">八代推广+分红币后台</a></li> 
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">ZVX全能币后台</a></li>
           </ul>
-        </li>
+        </li> -->
       </ul>
       <form class="d-flex" role="search">
         
          <button  class="btn btn-outline-success"  id="wallet" v-if="!ready && !wrongNetwork" v-on:click="connectWallet" type="button" > 连接钱包 </button>
          <span class="badge bg-success" v-if="ready "><div class="wid">连接成功：<span  href="#0"   v-text="account"></div></span></span>
-         <span v-if="wrongNetwork"  style="color: red">请切换到BSC智能链</span>
+         <span class="badge bg-danger"  v-if="wrongNetwork"  >请切换到BSC智能链</span>
          
       </form>
     </div>
@@ -92,6 +95,8 @@ div.wid{
 
 <!-- 头部结束 -->
 
+<br>
+<br>
 <br>
 <br>
 
@@ -185,20 +190,43 @@ div.wid{
 <div class="container">
   <div class="row">
     <div class="col-4">
-      左边卡片位置
+      
+
+
+<div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
+  <div class="card-header"><h2>使用须知</h2></div>
+  <div class="card-body">
+    <h5 class="card-title">请输入合约地址后进行交互</h5>
+    <p class="card-text">并非所有合约通用,此合约进用于分红合约和八代推广合约的通用功能管理<br>
+      请遵守所在地法律法规,禁止使用本工具进行违法犯罪行为
+    </p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
     </div>
     <div class="col-8">
       <div class="card text-white bg-dark mb-3" style="max-width: 180rem;">
   <div class="card-header">
-      <label for="inputPassword5" class="form-label  " ><strong>合约地址</strong> </label>
-<input  id="qianbaodizhi" type="text" id="inputPassword5" class="form-control"  placeholder="请输入您的合约地址"></div>
+      <label for="inputPassword5" class="form-label  "  ><strong>合约地址</strong> </label>
+<input   id="qianbaodizhi" type="text" id="inputPassword5" class="form-control container" style="width: 600px;" placeholder="请输入您的合约地址" required="required">
+<br></div>
   <div class="card-body">
 
 
 <div class="container">
    <div class="row">
     <div class="col-2">
-      1 of 3
+
     </div>
     <div class="col-8">
       
@@ -210,7 +238,7 @@ div.wid{
 <label for="inputPassword5" class="form-label  " ><strong>买入分红比例</strong> </label>
  <form class="row g-3" v-on:submit.prevent="setBuyTokenRewardsFee">
   <div class="col">
-    <input type="text" v-model.number="mairu" class="form-control"      id="inputPasswor2"          placeholder="买入分红比例" >
+    <input autocomplete="off" type="text" v-model.number="mairu" class="form-control"      id="inputPasswor2"          placeholder="买入分红比例" >
   </div>
   <div class="col-2">
 <button type="submit" class="btn btn-success">提交</button>
@@ -220,7 +248,7 @@ div.wid{
 <label for="inputPassword5" class="form-label  " ><strong>买入流动性比例</strong> </label>
  <form class="row g-3" v-on:submit.prevent="setBuyLiquidityFee">
   <div class="col">
-    <input type="text" v-model.number="liudong" class="form-control"      id="inputPasswor2"          placeholder="买入流动性比例" >
+    <input autocomplete="off" type="text" v-model.number="liudong" class="form-control"      id="inputPasswor2"          placeholder="买入流动性比例" >
   </div>
   <div class="col-2">
 <button type="submit" class="btn btn-success">提交</button>
@@ -232,7 +260,7 @@ div.wid{
 <label for="inputPassword5" class="form-label  " ><strong>买入营销钱包分红比例</strong> </label>
  <form class="row g-3" v-on:submit.prevent="setBuyMarketingFee">
   <div class="col">
-    <input type="text" v-model.number="yingxiao" class="form-control"      id="inputPasswor2"          placeholder="买入营销钱包占比" >
+    <input autocomplete="off"  type="text" v-model.number="yingxiao" class="form-control"      id="inputPasswor2"          placeholder="买入营销钱包占比" >
   </div>
   <div class="col-2">
 <button type="submit" class="btn btn-success">提交</button>
@@ -242,7 +270,7 @@ div.wid{
 <label for="inputPassword5" class="form-label  " ><strong>买入销毁比例</strong> </label>
  <form class="row g-3" v-on:submit.prevent="setBuyDeadFee">
   <div class="col">
-    <input type="text" v-model.number="xiaohui" class="form-control"      id="inputPasswor2"          placeholder="买入销毁比例" >
+    <input autocomplete="off" type="text" v-model.number="xiaohui" class="form-control"      id="inputPasswor2"          placeholder="买入销毁比例" >
   </div>
   <div class="col-2">
 <button type="submit" class="btn btn-success">提交</button>
@@ -254,7 +282,7 @@ div.wid{
 <label for="inputPassword5" class="form-label  " ><strong>卖出分红比例</strong> </label>
  <form class="row g-3" v-on:submit.prevent="setSellTokenRewardsFee">
   <div class="col">
-    <input type="text" v-model.number="maichu" class="form-control"      id="inputPasswor2"          placeholder="卖出分红比例" >
+    <input autocomplete="off" type="text" v-model.number="maichu" class="form-control"      id="inputPasswor2"          placeholder="卖出分红比例" >
   </div>
   <div class="col-2">
 <button type="submit" class="btn btn-success">提交</button>
@@ -264,7 +292,7 @@ div.wid{
 <label for="inputPassword5" class="form-label  " ><strong>卖出添加流动性比例</strong> </label>
  <form class="row g-3" v-on:submit.prevent="setSellLiquidityFee">
   <div class="col">
-    <input type="text" v-model.number="liudong1" class="form-control"      id="inputPasswor2"          placeholder="卖出添加流动性比例" >
+    <input autocomplete="off" type="text" v-model.number="liudong1" class="form-control"      id="inputPasswor2"          placeholder="卖出添加流动性比例" >
   </div>
   <div class="col-2">
 <button type="submit" class="btn btn-success">提交</button>
@@ -275,7 +303,7 @@ div.wid{
 <label for="inputPassword5" class="form-label  " ><strong>卖出营销钱包比例</strong> </label>
  <form class="row g-3" v-on:submit.prevent="setSellMarketingFee">
   <div class="col">
-    <input type="text" v-model.number="yingxiao1" class="form-control"      id="inputPasswor2"          placeholder="卖出营销钱包比例" >
+    <input autocomplete="off" type="text" v-model.number="yingxiao1" class="form-control"      id="inputPasswor2"          placeholder="卖出营销钱包比例" >
   </div>
   <div class="col-2">
 <button type="submit" class="btn btn-success">提交</button>
@@ -285,7 +313,17 @@ div.wid{
 <label for="inputPassword5" class="form-label  " ><strong>卖出销毁比例</strong> </label>
  <form class="row g-3" v-on:submit.prevent="setSellDeadFee">
   <div class="col">
-    <input type="text" v-model.number="xiaohui1" class="form-control"      id="inputPasswor2"          placeholder="卖出营销钱包比例" >
+    <input autocomplete="off" type="text" v-model.number="xiaohui1" class="form-control"      id="inputPasswor2"          placeholder="卖出销毁比例" >
+  </div>
+  <div class="col-2">
+<button type="submit" class="btn btn-success">提交</button>
+  </div>
+</form>  
+
+<label for="inputPassword5" class="form-label  " ><strong>持币多少参与分红</strong> </label>
+ <form class="row g-3" v-on:submit.prevent="updateMinimumTokenBalanceForDividends">
+  <div class="col">
+    <input autocomplete="off" type="text" v-model.number="chibi" class="form-control"      id="inputPasswor2"          placeholder="持币多少参与分红" >
   </div>
   <div class="col-2">
 <button type="submit" class="btn btn-success">提交</button>
@@ -294,11 +332,31 @@ div.wid{
 
 
 
+<label for="inputPassword5" class="form-label  " ><strong>分红间隔时间</strong> </label>
+ <form class="row g-3" v-on:submit.prevent="updateClaimWait">
+  <div class="col">
+    <input autocomplete="off" type="text" v-model.number="jiange" class="form-control"      id="inputPasswor2"          placeholder="分红间隔时间 单位/秒" >
+  </div>
+  <div class="col-2">
+<button type="submit" class="btn btn-success">提交</button>
+
+  </div>
+
+</form>  
+
+
+  <br>
+    <br>
+
+
+
+
+
 
 
     </div>
     <div class="col-2">
-      3 of 3
+
     </div>
   </div>
 </div>

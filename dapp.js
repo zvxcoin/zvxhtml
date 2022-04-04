@@ -1601,13 +1601,14 @@ function init() {
 			mairu: "", //绑定的输入框值（定义漏了）  记得加
 			liudong: "", //绑定的输入框值 （定义漏了） 记得加
 			shijian: "",
+			mairu: "",
 		},
 		computed: {
 			ready: function () {
-				return this.account && this.chainId === 97;
+				return this.account && this.chainId === 56;
 			},
 			wrongNetwork: function () {
-				return this.account && this.chainId !== 97;
+				return this.account && this.chainId !== 56;
 			},
 		},
 		methods: {
@@ -1838,8 +1839,8 @@ function init() {
 				loading.close();
 			},
 			// 卖出销毁比例结束
-			// 白名单
-			excludeFromFees: async function () {
+			// 持币多少参与分红
+			updateMinimumTokenBalanceForDividends: async function () {
 				let loading = showLoading("准备", "等待中...");
 				try {
 					if (!this.ready) {
@@ -1855,9 +1856,8 @@ function init() {
 					);
 					// 调用vote()函数，并返回一个tx对象:
 					// 也需要修改 let tx = await contract.方法名称(this.huangbin 按钮);
-					let tx = await contract.excludeFromFees(
-						this.baimingdan,
-						this.xuanxiang
+					let tx = await contract.updateMinimumTokenBalanceForDividends(
+						this.chibi
 					);
 					loading.setMessage("处理中请等待...");
 					// 等待tx落块，并至少1个区块确认:
@@ -1868,7 +1868,35 @@ function init() {
 				}
 				loading.close();
 			},
-			// 白名单比例结束
+			// 持币多少参与分红
+			// 分红间隔时间
+			updateClaimWait: async function () {
+				let loading = showLoading("准备", "等待中...");
+				try {
+					if (!this.ready) {
+						throw "请先连接钱包!";
+					}
+					loading.setMessage("请在钱包确认交易");
+					// TODO: 检查MetaMask连接信息
+					// 根据地址和ABI创建一个Contract对象:
+					let contract = new ethers.Contract(
+						VOTE_ADDR,
+						VOTE_ABI,
+						window.getWeb3Provider().getSigner()
+					);
+					// 调用vote()函数，并返回一个tx对象:
+					// 也需要修改 let tx = await contract.方法名称(this.huangbin 按钮);
+					let tx = await contract.updateClaimWait(this.jiange);
+					loading.setMessage("处理中请等待...");
+					// 等待tx落块，并至少1个区块确认:
+					await tx.wait(1);
+					showInfo("成功", "修改信息成功");
+				} catch (e) {
+					showAlert("错误", translateError(e));
+				}
+				loading.close();
+			},
+			// 分红间隔时间
 			accountChanged: function (accounts) {
 				console.log(
 					"wallet account changed:",
